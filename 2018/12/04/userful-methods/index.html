@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>一些实用的js方法 | MrLi&#39;s 博客</title>
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/">
+  <link rel="alternate" href="/atom.xml" title="MrLi's 博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="icon" href="">
+  
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+  
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="//cdn.bootcss.com/node-waves/0.7.5/waves.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+</head>
+</html>
+<body>
+    <div id="loading-bar-wrapper">
+  <div id="loading-bar" class="pure"></div>
+</div>
+
+    <script>setLoadingBarProgress(20)</script>
+    <header class="l_header pure">
+    <div class="wrapper">
+        <div class="nav-main container container--flex">
+            <a class="logo flat-box" href="/">MrLi's 博客</a>
+            <div class="menu">
+                <ul class="h-list">
+                    
+                    
+                    <li>
+                        <a class="nav flat-box" href="/">
+                            <i class="fas fa-home fa-fw"></i>&nbsp;主页
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a class="nav flat-box" href="/archives/">
+                            <i class="fas fa-archive fa-fw"></i>&nbsp;归档
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <div class="underline"></div>
+            </div>
+
+            
+            <div class="m_search">
+                <form name="searchform" class="form u-search-form">
+                    <input type="text" class="input u-search-input" placeholder="Search">
+                    <span class="icon"><i class="fas fa-search fa-fw"></i></span>
+                </form>
+            </div>
+            
+            <ul class="switcher h-list">
+                
+                <li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+                
+                <li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+            </ul>
+        </div>
+
+        <div class="nav-sub container container--flex">
+            <a class="logo flat-box"></a>
+            <ul class="switcher h-list">
+                <li class="s-comment"><a class="fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+                <li class="s-top"><a class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a></li>
+                <li class="s-toc"><a class="fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<aside class="menu-phone">
+    <nav>
+        <ul>
+            
+            
+            <li>
+                <a class="nav  flat-box" href="/">
+                    <i class="fas fa-home fa-fw"></i>&nbsp;主页
+                </a>
+            </li>
+            
+            <li>
+                <a class="nav  flat-box" href="/archives/">
+                    <i class="fas fa-archive fa-fw"></i>&nbsp;归档
+                </a>
+            </li>
+            
+            
+        </ul>
+    </nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+    <div class="l_body">
+    <div class='container clearfix'>
+        <div class='l_main'>
+            <article id="post-userful-methods" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+    <section class="meta">
+        
+            <h1 class="title">一些实用的js方法</h1>
+        
+        <time class="time">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            2018-12-04
+        </time>
+        
+          <div class="browse busuanzi"><i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+            <span id="busuanzi_value_page_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+          </div>
+        
+
+        
+    
+    <div class="cats">
+        <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+        <a class="categories" href="/categories/js/">js</a>
+    </div>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>&emsp;&emsp;在日常开发中我们经常会用到一些小的算法，比如：转换日期格式，获取网址参数等等，下面是我整理出的一些在日常开发中经常用到的小方法。</p>
+<a id="more"></a>
+<p>1.获取url中的参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getParams</span>(<span class="params">field</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> href = <span class="built_in">window</span>.location.href;</span><br><span class="line">    <span class="keyword">var</span> arg = href.split(<span class="string">'?'</span>);</span><br><span class="line">    <span class="keyword">if</span> (arg.length === <span class="number">1</span> &amp;&amp; arg[<span class="number">0</span>] === href) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">        <span class="keyword">var</span> arr = arg[<span class="number">1</span>].split(<span class="string">'&amp;'</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = arr.length; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> splitArr = arr[i].split(<span class="string">'='</span>);</span><br><span class="line">            obj[splitArr[<span class="number">0</span>]] = splitArr[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">decodeURI</span>(obj[field]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;其中参数为你想要得到的值得key，例如：ulr = ‘<a href="http://www.xxx.com" target="_blank" rel="noopener">www.xxx.com</a> ? id = 1’ ,  getParams(‘id’)即可得到id值</p>
+<p>2.格式化时间</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function formatTime(<span class="built_in">date</span>)&#123;</span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">year</span> = date.getFullYear()</span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">month</span> = date.getMonth() + <span class="number">1</span></span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">day</span> = date.getDate()</span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">hour</span> = date.getHours()</span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">minute</span> = date.getMinutes()</span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">second</span> = date.getSeconds()</span><br><span class="line"></span><br><span class="line">    function formatNumber(<span class="built_in">n</span>)&#123;</span><br><span class="line">          <span class="built_in">n</span> = n.toString()</span><br><span class="line">          return <span class="built_in">n</span>[<span class="number">1</span>]  ? <span class="built_in">n</span> <span class="symbol">:</span> '<span class="number">0</span>' + <span class="built_in">n</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return [<span class="built_in">year</span>, <span class="built_in">month</span>, <span class="built_in">day</span>].map(formatNumber).join('/') +' '+  [<span class="built_in">hour</span>, <span class="built_in">minute</span>, <span class="built_in">second</span>].map(formatNumber).join('<span class="symbol">:</span>')</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 3.将简单json转换为树结构的json</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transferToTree</span><span class="params">(a, idStr, pidStr, chindren)</span> &#123;</span></span><br><span class="line">    var r = [], hash = &#123;&#125;, id = idStr, pId = pidStr, children = chindren, <span class="built_in">i</span> = <span class="number">0</span>, <span class="built_in">j</span> = <span class="number">0</span>, len = a.<span class="built_in">length</span>;</span><br><span class="line">    <span class="keyword">for</span> (; <span class="built_in">i</span> &lt; len; <span class="built_in">i</span>++) &#123;</span><br><span class="line">        hash[a[<span class="built_in">i</span>][id]] = a[<span class="built_in">i</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (; <span class="built_in">j</span> &lt; len; <span class="built_in">j</span>++) &#123;</span><br><span class="line">        var aVal = a[<span class="built_in">j</span>], hashVP = hash[aVal[pId]];</span><br><span class="line">        aVal.name = aVal.name + <span class="string">" : "</span> + aVal.mail;</span><br><span class="line">        <span class="keyword">if</span> (hashVP) &#123;</span><br><span class="line">            !hashVP[children] &amp;&amp; (hashVP[children] = []);</span><br><span class="line">            hashVP[children].push(aVal);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r.push(aVal);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;第一个参数为待转换的数据，第二个参数为子数据的id，第三个参数为子数据的pid，第四个参数为转换后子数据的字段名</p>
+<p>&emsp;&emsp;总结：会用不是主要的，关键是要掌握其中的原理，一边根据自己的需求来进行改造，以上是在实际项目中遇到过的，在此记录下来，以后还会持续更新</p>
+
+        </div>
+
+        <section class="meta">
+            <time class="time" itemprop="dateUpdated" datetime="2018-12-10T09:43:47+08:00" content="2018-12-10">
+                <i class="fas fa-pen fa-fw" aria-hidden="true"></i>
+                本文最后更新于：2018-12-10
+            </time>
+            
+                
+                <div class="tags">
+                    <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+                    <a class="tag" href="/tags/js/">js</a>
+                </div>
+            
+        </section>
+
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
+                            <h4>
+                                <a href="/2018/12/06/vue-plugin/" rel="prev" title="如何发布vue插件到npm">
+                                  
+                                      如何发布vue插件到npm
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+                                    <a class="tag" href="/tags/vue/">vue</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+                
+
+    <div class="recommended_posts">
+        <h4><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;你可能感兴趣的文章</h4>
+        <ul>
+            
+                <li><a href="http://yoursite.com/2018/12/10/vue-attention/">vue开发过程中须注意的问题</a></li>
+            
+                <li><a href="http://yoursite.com/2018/12/06/vue-plugin/">如何发布vue插件到npm</a></li>
+            
+        </ul>
+    </div>
+
+
+            
+
+            
+
+                
+
+                
+
+                
+            
+
+        </section>
+    </article>
+
+
+<script>
+    window.subData = {
+        title: '一些实用的js方法',
+        tools: true
+    }
+</script>
+
+
+        </div>
+        <aside class='l_side'>
+            
+    
+        
+<section class="m_widget author">
+    
+    <div class="social-wrapper">
+        <div class="clock-wrapper">
+    <div class="box" id="clock">
+        <!-- 原点 -->
+        <div class="origin"></div>
+        <!-- 时钟数 -->
+        <div class="dot_box">
+            <div class="dot">6</div>
+            <div class="dot">5</div>
+            <div class="dot">4</div>
+            <div class="dot">3</div>
+            <div class="dot">2</div>
+            <div class="dot">1</div>
+            <div class="dot">12</div>
+            <div class="dot">11</div>
+            <div class="dot">10</div>
+            <div class="dot">9</div>
+            <div class="dot">8</div>
+            <div class="dot">7</div>
+        </div>
+        <!-- 时、分、秒针 -->
+        <div class="clock_line hour_line" id="hour_line"></div>
+        <div class="clock_line minute_line" id="minute_line"></div>
+        <div class="clock_line second_line" id="second_line"></div>
+        <!-- 日期 -->
+        <div class="date_info" id="date_info"></div>
+        <!-- 时间 -->
+        <div class="time_info">
+            <div class="time" id="hour_time"></div>
+            <div class="time" id="minute_time"></div>
+            <div class="time" id="second_time"></div>
+        </div>
+    </div>
+</div>
+    </div>
+    
+    
+    <div class="social-wrapper">
+        
+        
+        <a href="https://gitee.com/MrLisong" class="social flat-box" target="_blank" rel="external"><i class="social fab fa-git-square" aria-hidden="true"></i></a>
+        
+        
+        
+        <a href="https://github.com/MrLiSong" class="social flat-box" target="_blank" rel="external"><i class="social fab fa-github" aria-hidden="true"></i></a>
+        
+        
+    </div>
+    
+</section>
+
+
+    
+    
+        
+
+    
+    
+        <section class="m_widget categories">
+    <header class="header pure">
+        <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;分类</div>
+    </header>
+    <div class="content pure">
+        
+            <ul class="entry">
+                
+                    <li><a class="flat-box" href="/categories/js/"><div class="name">js</div><div class="badge">1</div></a></li>
+                
+                    <li><a class="flat-box" href="/categories/vue/"><div class="name">vue</div><div class="badge">2</div></a></li>
+                
+            </ul>
+        
+    </div>
+</section>
+
+    
+    
+        
+    <section class="m_widget tagcloud">
+        <header class="header pure">
+            <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;标签</div>
+        </header>
+        <div class="content pure">
+            <a href="/tags/js/" style="font-size: 14px; color: #999">js</a> <a href="/tags/vue/" style="font-size: 24px; color: #555">vue</a>
+        </div>
+    </section>
+
+
+    
+    
+        
+
+    
+    
+    
+        <section class="m_widget links">
+    <header class="header pure">
+        <div><i class="fas fa-handshake fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;打赏</div>
+    </header>
+    <div class="content">
+        <img class="exceptional" src="/images/weixin.png" alt="">
+    </div>
+</section>
+
+    
+
+
+        </aside>
+        <script>setLoadingBarProgress(60);</script>
+    </div>
+    </div>
+    <footer id="footer" class="clearfix">
+    
+        <div class="social-wrapper">
+          
+              
+                  <a href="https://gitee.com/MrLisong" class="social fab fa-git-square flat-box" target="_blank" rel="external"></a>
+              
+          
+              
+                  <a href="https://github.com/MrLiSong" class="social fab fa-github flat-box" target="_blank" rel="external"></a>
+              
+          
+        </div>
+    
+    <br>
+    <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，
+		总访问量为 <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+    </div>
+</footer>
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+    <script>setLoadingBarProgress(80);</script>
+    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/node-waves/0.7.5/waves.min.js"></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+<!-- 访问统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+
+<script>
+    $(function () {
+        var clock = document.getElementById("clock");
+
+        function initNumXY() {
+            //  12个数字的位置设置
+            var radius = 85;//  大圆半价
+            var dot_num = 360 / $(".dot").length;//  每个div对应的弧度数
+            //  每一个dot对应的弧度
+            var ahd = dot_num * Math.PI / 180;
+            $(".dot").each(function (index, el) {
+                $(this).css({
+                    "left": 110 + Math.sin((ahd * index)) * radius,
+                    "top": 110 + Math.cos((ahd * index)) * radius
+                });
+            });
+            //  刻钟设置
+            for (var i = 0; i < 60; i++) {
+                clock.innerHTML += "<div class='clock-scale'> " +
+                    "<div class='scale-hidden'></div>" +
+                    "<div class='scale-show'></div>" +
+                    "</div>";
+            }
+            var scale = document.getElementsByClassName("clock-scale");
+            for (var j = 0; j < scale.length; j++) {
+                scale[j].style.transform = "rotate(" + (j * 6 - 90) + "deg)";
+            }
+        }
+
+        initNumXY();//  调用上面的函数
+        //  获取时钟id
+        var hour_line = document.getElementById("hour_line"),
+            minute_line = document.getElementById("minute_line"),
+            second_line = document.getElementById("second_line"),
+            date_info = document.getElementById("date_info");
+
+        //  设置动态时间
+        function setTime() {
+            var nowdate = new Date();
+            //  获取年月日时分秒
+            var year = nowdate.getFullYear(),
+                month = nowdate.getMonth() + 1,
+                day = nowdate.getDay(),
+                hours = nowdate.getHours(),
+                minutes = nowdate.getMinutes(),
+                seconds = nowdate.getSeconds(),
+                date = nowdate.getDate();
+            var weekday = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            date_info.innerHTML = year + "/" + month + "/" + date + "<br/>" + weekday[day];
+            //  时分秒针设置
+            var hour_rotate = (hours * 30 - 90) + (Math.floor(minutes / 12) * 6);
+            hour_line.style.transform = 'rotate(' + hour_rotate + 'deg)';
+            minute_line.style.transform = 'rotate(' + (minutes * 6 - 90) + 'deg)';
+            second_line.style.transform = 'rotate(' + (seconds * 6 - 90) + 'deg)';
+        }
+
+        // 设置定时器，每隔一秒执行一次以上方法
+        setTime();
+        setInterval(setTime, 1000);
+    });
+</script>
+
+<script>
+    for (var i = 0, len = $('.h-list li a.nav').length; i < len; i++) {
+        if($('.h-list li a.nav').eq(i).attr('href') === window.location.pathname) {
+            $('.h-list li a.nav').eq(i).addClass('current');
+        }
+    }
+</script>
+
+    <script>setLoadingBarProgress(100);</script>
+</body>
