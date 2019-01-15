@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: js | MrLi&#39;s 博客</title>
+  <title>浅谈js中对于this的理解 | MrLi&#39;s 博客</title>
   
   <meta name="HandheldFriendly" content="True">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -112,108 +112,134 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
+            <article id="post-this-point" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+    <section class="meta">
+        
+            <h1 class="title">浅谈js中对于this的理解</h1>
+        
+        <time class="time">
+            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+            2019-01-15
+        </time>
+        
+          <div class="browse busuanzi"><i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+            <span id="busuanzi_value_page_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+          </div>
+        
+
+        
+    
+    <div class="cats">
+        <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+        <a class="categories" href="/categories/js/">js</a>
+    </div>
+
+
+    </section>
+
+    <section class="article typo">
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>&emsp;&emsp;对于前端开发者来说，this的指向总是一个让人头疼的问题，下面是个人在开发中总结出的关于this指向的一些情况，如有问题，欢迎指教</p>
+<a id="more"></a>
+<p>&emsp;&emsp;<strong><em>首先明确一点，this永远指向一个对象，并且它的指向不取决于this在哪里使用，而取决于使用它的函数在哪里被调用</em></strong></p>
+<h4 id="1-指向window对象"><a href="#1-指向window对象" class="headerlink" title="1. 指向window对象"></a>1. 指向window对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>);          <span class="comment">//  指向window</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);      <span class="comment">//  没有对象调用该函数，所以this指向window</span></span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);      <span class="comment">//  setTimeout是window的内置方法，等同于window.setTimeout,所以this同样指向window</span></span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2-指向自定义对象"><a href="#2-指向自定义对象" class="headerlink" title="2. 指向自定义对象"></a>2. 指向自定义对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    name: <span class="string">'张三'</span>,</span><br><span class="line">    sex: <span class="string">'男'</span>,</span><br><span class="line">    getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getName();    <span class="comment">//  this指向obj</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">    name: <span class="string">'张三'</span>,</span><br><span class="line">    sex: <span class="string">'男'</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        test: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj1.methods.test();    <span class="comment">//  this指向obj1['methods']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> arr = [test, <span class="number">0</span>, <span class="number">1</span>];</span><br><span class="line">arr[<span class="number">0</span>]();       <span class="comment">//  this指向arr</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-指向构造函数的实例"><a href="#3-指向构造函数的实例" class="headerlink" title="3. 指向构造函数的实例"></a>3. 指向构造函数的实例</h4><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="function"><span class="keyword">Constructor</span> = <span class="title">function</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    console.log(this);          //  该构造函数已被实例化，所以this指向该构造函数的实例fun</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span>;</span></span><br><span class="line"><span class="function"><span class="keyword">Constructor</span>.<span class="title">prototype</span> = <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    name: '张三',</span></span></span><br><span class="line"><span class="function"><span class="comment">    sex: '男',</span></span></span><br><span class="line"><span class="function"><span class="comment">    getAge: function() &#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">        console.log(this);     //  构造函数的实例会继承该构造函数的实例或者方法，所以this同样会指向fun</span></span></span><br><span class="line"><span class="function"><span class="comment">    &#125;</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="title">var</span> <span class="title">fun</span> = <span class="title">new</span> <span class="title">Constructor</span><span class="params">()</span>;</span></span><br><span class="line">fun.getAge();</span><br></pre></td></tr></table></figure>
+<p>在有些情况下，this本身的指向并不是我们想要的，可以通过call或者replay方法来改变this的指向，这个以后再做记录。</p>
+
+        </div>
+
+        <section class="meta">
+            <time class="time" itemprop="dateUpdated" datetime="2019-01-15T18:03:55+08:00" content="2019-01-15">
+                <i class="fas fa-pen fa-fw" aria-hidden="true"></i>
+                本文最后更新于：2019-01-15
+            </time>
             
-    <script>
-        window.subData= { title:'标签 : js'}
-    </script>
-
-
-<section class="post-list">
-    
-        <div class="post-wrapper">
-            <article class="post reveal ">
-    <section class="meta">
-        <h2 class="title">
-            <a href="/2019/01/15/this-point/">
                 
-                    浅谈js中对于this的理解
-                
-            </a>
-        </h2>
-        <time class="time">
-            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;2019-01-15
-        </time>
+                <div class="tags">
+                    <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+                    <a class="tag" href="/tags/js/">js</a>
+                </div>
+            
+        </section>
+
         
-    
-    <div class="cats">
-        <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-        <a class="categories" href="/categories/js/">js</a>
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一篇&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2018/12/10/vue-attention/" rel="prev" title="vue开发过程中须注意的问题">
+                                    
+                                        vue开发过程中须注意的问题
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <i class="fas fa-tags fa-fw" aria-hidden="true"></i>
+                                    <a class="tag" href="/tags/vue/">vue</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+
+    </section>
+
+</article>
+
+<br>
+
+<!-- 显示推荐文章和评论 -->
+
+    <article class="post white-box comments">
+        <section class="article typo">
+
+            
+                
+
+    <div class="recommended_posts">
+        <h4><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;你可能感兴趣的文章</h4>
+        <ul>
+            
+                <li><a href="http://yoursite.com/2018/12/10/vue-attention/">vue开发过程中须注意的问题</a></li>
+            
+                <li><a href="http://yoursite.com/2018/12/06/vue-plugin/">如何发布vue插件到npm</a></li>
+            
+                <li><a href="http://yoursite.com/2018/12/04/userful-methods/">一些实用的js方法</a></li>
+            
+        </ul>
     </div>
 
 
-    </section>
+            
 
-    <section class="article typo">
-        <p>&emsp;&emsp;对于前端开发者来说，this的指向总是一个让人头疼的问题，下面是个人在开发中总结出的关于this指向的一些情况，如有问题，欢迎指教</p>
-        
-            <div class="readmore">
-                <a href="/2019/01/15/this-point/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
-        
+            
 
-        
-            <div class="full-width auto-padding tags">
                 
-                    <a href="/tags/js/"><i class="fas fa-tag fa-fw"></i>&nbsp;js</a>
+
                 
-            </div>
-        
-    </section>
-</article>
 
-        </div>
-    
-        <div class="post-wrapper">
-            <article class="post reveal ">
-    <section class="meta">
-        <h2 class="title">
-            <a href="/2018/12/04/userful-methods/">
                 
-                    一些实用的js方法
-                
-            </a>
-        </h2>
-        <time class="time">
-            <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;2018-12-04
-        </time>
-        
-    
-    <div class="cats">
-        <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-        <a class="categories" href="/categories/js/">js</a>
-    </div>
+            
+
+        </section>
+    </article>
 
 
-    </section>
-
-    <section class="article typo">
-        <p>&emsp;&emsp;在日常开发中我们经常会用到一些小的算法，比如：转换日期格式，获取网址参数等等，下面是我整理出的一些在日常开发中经常用到的小方法。</p>
-        
-            <div class="readmore">
-                <a href="/2018/12/04/userful-methods/" class="flat-box">
-                    <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-                    阅读全文
-                </a>
-            </div>
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/js/"><i class="fas fa-tag fa-fw"></i>&nbsp;js</a>
-                
-            </div>
-        
-    </section>
-</article>
-
-        </div>
-    
-</section>
-
+<script>
+    window.subData = {
+        title: '浅谈js中对于this的理解',
+        tools: true
+    }
+</script>
 
 
         </div>
@@ -314,6 +340,16 @@
     
     
         
+    <section class="m_widget toc-wrapper">
+        <header class="header pure">
+            <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
+            <div class="wrapper"><a class="s-toc rightBtn" title="固定到顶部" target="_blank" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+        </header>
+        <div class="content pure">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-指向window对象"><span class="toc-text">1. 指向window对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-指向自定义对象"><span class="toc-text">2. 指向自定义对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-指向构造函数的实例"><span class="toc-text">3. 指向构造函数的实例</span></a></li></ol>
+        </div>
+    </section>
+
 
     
     
@@ -383,6 +419,10 @@
 
 <script src="/js/search.js"></script>
 <script src="/js/app.js"></script>
+
+
+
+
 
 
 
